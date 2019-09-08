@@ -241,6 +241,8 @@ void OctoWS2811::isr(void)
 #if defined(__MKL26Z64__)
 	GPIOD_PCOR = 0xFF;
 #endif
+        // Compiler optimizations seem to cause problems with the last dma transfer if show() is called too soon
+	GPIOD_PCOR = 0xFF;
 	//Serial1.print("*");
 	update_completed_at = micros();
 	update_in_progress = 0;
